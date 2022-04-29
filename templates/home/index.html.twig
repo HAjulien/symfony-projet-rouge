@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}  
+
+
+{% block body %}
+
+<!-- page 1 représente un diaporma -->
+
+    <div class="container">
+        
+        <input type="radio" name="image" id="i1" checked>
+        <input type="radio" name="image" id="i2">
+        <input type="radio" name="image" id="i3">
+        
+<!-- chaque image à 2 labels pour changer image quand on appuie sur le cote. -->
+        <div class="slide_img" id="one">   
+            <label for="i3" class="pre"></label>
+            <label for="i2" class="nxt"></label>
+        </div>
+        
+        <div class="slide_img" id="two"> 
+            <label for="i1" class="pre"></label>
+            <label for="i3" class="nxt"></label>
+		</div>
+        
+        <div class="slide_img" id="three">
+            <label for="i2" class="pre"></label>
+            <label for="i1" class="nxt"></label>
+        </div>
+
+<!-- éléments à l'intérieur du diaporama (titre,slogan et points navigation) -->
+
+		<div class="insidePhoto">
+            <h1 id="titre1">Cantine Miam</h1>
+            <aside id="slogan">
+                <h2 id="sloganPart1" >une expérience</h2>
+                <h2 id="sloganPart2"> <span id="unique"><a href="#bienvenue">unique</a></span></h2>
+            </aside>    
+<!--points de navigation bouttons radio personnalisé qui remplace inpute type radio  -->
+            <label class="dot" id="dot1" for="i1" ></label>
+            <label class="dot" id="dot2" for="i2" ></label>
+            <label class="dot" id="dot3" for="i3" ></label>    
+		</div>	
+	</div>
+
+<!-- fin de la page 1 -->
+<!-- début de la page 2 -->
+
+    <section class="principale">
+        <h2 id="bienvenue">Bienvenue !!!!</h2>
+        <article>    <!--   article 1/3     -->
+            <h3>Un nouveau départ.</h3>
+            <p class="paraOne">
+                <img src="images/couverts.png" alt="couverts" class="fork">
+                 <span id="bubble"><abbr title="">l’Afpa</abbr> </span> de Créteil est fier de vous annoncer l’ouverture de la nouvelle <strong>Cantine Miam</strong>. Il nous aura fallu plus de 4 mois pour rénover entièrement la salle et les cuisines. C’est le <strong>chef Michael Dellore</strong> qui sera aux commandes de l’établissement.
+                 <span class="CTA buttomEquipe">En savoir plus sur l'équipe : <a href="equipe.html"> Notre équipe</a> </span>
+             </p>
+        </article>
+
+        <article class="try">   <!--   article 2/3  -->
+            <h3 >Nous n'utilisons que des produits frais!</h3>                  
+            <figure class="friseImages">
+                <img src="images/epices.jpg" alt="epices">
+                <img src="images/legumes.jpg" alt="legumes" >
+                <img src="images/fruitsSecs.jpg" alt="fruits secs">
+                <img src="images/oranges.jpg" alt="oranges">
+            </figure>
+            <p>
+                C’est <strong>l’engagement de notre chef.</strong> Pour cela, nous pouvons compter sur nos dizaines de partenaires agriculteurs, éleveurs et pécheurs de notre région. Que des produits de saisons issus du développement durable, pour des plats frais, sans pesticides et écologique.
+                <span class="CTA buttomCommand">Pour accéder au click and collect: <a href="equipe.html">Commander</a> </span>
+            </p>
+        </article>
+
+        <article> <!--   article 3/3   -->
+            <h3>Recettes inspirées par les saveurs du monde.</h3>
+            <figure id="photo__omelette">
+                <figcaption>0melette roulée </figcaption>
+                <img src="images/pexels-klaus-nielsen-6294359.jpg" alt="omelette roulée" class="omelette">
+            </figure>
+            <p class="para3">
+                Fini les plats de cuisine sans surprise! Le chef Dollore s’est inspiré de ses nombreux voyages à travers le monde pour vous offrir une <strong>explosion de saveurs</strong> dans votre assiette. Faite lui confiance pour vous régaler chaque jour. Bonne appétit!!!!
+            </p>
+            <span class="CTA buttomMenu">Pour découvrir le menu: <a href="equipe.html"> Menu</a> </span>
+        </article>
+
+        <section id="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/skBGJ6OQTOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </section>
+
+    </section>
+
+{% endblock %}

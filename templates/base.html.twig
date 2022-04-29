@@ -1,19 +1,89 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- couleur personnalisé pour entête google sur mobile -->
+    <meta name="theme-color" content="#534F56">
+
+    <!-- description 147 caractères -->
+    <meta name="description" content="Venez découvrir les délicieux plats du Chef Michael Dellore, cuisinés qu'avec des produits frais. Vous pouvez commander à emporter sur notre site.">
+
+    <link rel="stylesheet" href=" {{ asset('cantine/css/styles.css') }} ">
+    <!-- titre avec toute les info importantes clair car apparaît sur moteur de recherche -->
+    <title>MIAM | Nouvelle Cantine de l'AFPA de Créteil </title>
+</head>
+<body>
+
+<!-- page accueil tablette et + -->
+    <div id="pageDesktop">
+        <header class="headerDesktop">
+            <img src="" alt="">
+<!-- menu grand format tablette  -->
+            <nav class="menuDesktop">
+                <ul class="menuLiens">
+                    <li class="menuLien "><a href="http:./index.html">ACCUEIL</a></li>
+                    <li class="menuLien "><a href="">MENU/TARIF</a></li>
+                    <li class="menuLien "><a href="">L'équipe</a></li>
+                    <li class="menuLien "><a href="">CLICK/COLLECT</a></li>
+                    <li class="menuLien "><a href="">CAFÉ</a></li>
+                    <li class="menuLien "><a href="http:./horaire__lieu.html">HORAIRE/LIEU</a></li>
+                    <li class="menuLien "><a href="">CONTACT</a></li>
+                </ul>
+            </nav>
+
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        {% block javascripts %}
+        {# {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
+        {% endblock %} #}
+        
         {% block body %}{% endblock %}
-    </body>
+    <nav id="menu">
+        <ul class="tapbar">
+            <li> <a href="#"><img src="images/coffee.png" alt="café"></a></li>
+            <li> <a href="#"><img src="images/clickCollect.png" alt="click and collect"></a></li>
+            <li>
+                <button class="hamburger">
+                    <span class="bar"></span>
+                </button>
+            </li>
+            <li> <a href="#"><img src="images/menu.png" alt="menu"></a></li>
+            <li> <a href="#"><img src="images/email.png" alt="mail"></a></li>
+        </ul>
+    </nav>
+
+<!-- fin menu tapbar -->
+<!-- menu apparaît quand on appuie sur le boutton burger (button class="hamburger") à l'aide du JavaScript. button se trouve à à l'intérieur de la tapbar -->
+
+    <nav class="navbar">
+        <ul class="navbar__links">
+            <li class="navbar__link "><a href="http:./index.html">ACCUEIL</a></li>
+            <li class="navbar__link "><a href="">DELLORE ET SON EQUIPE</a></li>
+            <li class="navbar__link "><a href="">MENU ET TARIF</a></li>
+            <li class="navbar__link "><a href="">CLICK AND COLLECT</a></li>
+            <li class="navbar__link "><a href="">CAFÉ</a></li>
+            <li class="navbar__link "><a href="http:./horaire__lieu.html">HORAIRE/ LIEU</a></li>
+            <li class="navbar__link "><a href="">CONTACTEZ-NOUS</a></li>
+        </ul>
+    </nav>
+
+<!-- fin menu burger -->
+
+    <footer>
+        <span class="nousSuivre"> nous suivre sur :</span>
+        <ul class="reseauxSociaux">
+            <li class="icone"> <img src="images/facebook.png" alt="facebook"> </li>
+            <li class="icone"> <img src="images/instagram.png" alt="instagram"> </li>
+            <li class="icone"> <img src="images/twitter.png" alt="twitter"> </li>
+        </ul>
+        <span class="copyright">CANTINE MIAM tous droits réservés, 2022</span>
+    </footer>
+
+    <script src="./javaScript/menuHamburger.js"></script>
+
+</body>
+
 </html>

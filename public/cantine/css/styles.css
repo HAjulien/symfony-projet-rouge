@@ -1,0 +1,1293 @@
+/* applique sur toute la page reset */
+
+@import url('https://fonts.googleapis.com/css2?family=Sanchez&family=Satisfy&display=swap');
+
+*::before, *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a, a:visited {
+  color: #f8f8f8;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Sanchez', serif, sans-serif;
+    font-size: 1.1rem ;
+    list-style: none;
+    text-decoration: none;
+    /* transition en douceur sur les ancres */
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+body{
+/* code trouvé sur my color space */
+    background: #cda673;
+    color: #131212;    
+}
+
+
+/* quand on selectionne un morceau texte */
+::selection{
+    color: #d6b589;
+    background-color: #040404;
+}
+
+/* début header */
+
+#pageDesktop{
+    display: none;
+}
+
+
+.headerMobile{
+    background-image: linear-gradient(to left top, #cda673, #d6b589, #dec4a0, #e7d3b7, #efe2cf);
+    border-bottom: 2px solid #534F56;
+    display: flex;
+    justify-content:space-between;
+    padding: 0px 10px;
+    align-items: center;
+    height: 9vh;
+}
+
+#logo{
+    height: 5.8vh;
+}
+
+#profil{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #534F56;
+    border-radius: 30px;
+    height: 5.8vh;  
+}
+
+#profil a{
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    text-indent: 15px;  
+}
+
+a img{
+    padding-left: 3px;
+}
+
+/* fin du header */
+/* debut de la page 1 */
+.container{
+    width: 100vw;
+    height: 90.7vh;
+}
+/* conteneur où vont se coller les images */
+.slide_img{
+    position: absolute;
+    width: 100vw;
+    height: 90.7vh;
+}
+
+/* image diaporama */
+#one, #two, #three{
+    background-size: cover;
+    background-position: center; 
+} 
+
+#one{
+    background-image: url(../images/accueil2.jpg);
+}
+
+#two{
+    background-image: url(../images/accueil1.jpg);
+}
+
+#three{
+    background-image: url(../images/accueil3.jpg);
+}
+
+/* élément à l'intérieur du diaporama */
+
+.insidePhoto{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 11%;
+    z-index: 1;
+}
+
+#titre1{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Satisfy', sans-serif;
+    width: 300px;
+    height: 10vh;
+    bottom: 60vh;
+    font-size: 2.5rem ;
+    letter-spacing: 2px;
+    margin-left: calc(50% - 150px);
+    background-color: #6a656ee5;
+    color: #cda673f5;
+    border-radius: 20px;
+    animation: showup 2s;
+}
+
+#slogan h2{
+    display: inline-block;
+    overflow: hidden;
+    color: #F8F8F8;
+    font-size: 1.5rem; 
+    margin-bottom: 5vh;  
+}
+
+#sloganPart1{
+    animation: showup 5s ;  
+}
+
+#sloganPart2{
+    width: 110px;
+    /* animation pour quel texte "unique" reste caché jusqu'au glissement */
+    animation: reveal 5s; 
+}
+
+#unique a{
+    font-size: 1.5rem;
+    border-radius: 20px;
+    padding:0px 10px;
+    background-image: linear-gradient(to right top, #534f56, #76606c, #9e7176, #be8875, #cda673);
+    color: #F8F8F8;
+    animation: slidein 5s;     
+}
+
+/* animation slogan */
+
+@keyframes showup {
+    
+    0% {opacity: 0;}
+/* fin du delai animation */
+    30% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes reveal {
+    0% {opacity: 0; width: 0px;}
+/* 55% début de l'animation 0 a 55% represente delai animation */
+    55% {opacity: 0; width: 0px;}
+    70% {opacity: 1; width: 0px;}
+    /* se decale légérement et lentementsur gauche */
+    100% {opacity: 1; width: 110px;}
+}
+
+@keyframes slidein {
+    55%{transform:translateX(200px);}
+    100%{transform:translateX(0px);}   
+}  
+
+/* fin animation slogan */
+/* enleve les bouttons radio pour les remplacer par nos bouttons labels (dot) que l'on va styliser */
+
+#i1, #i2, #i3{
+    display: none;
+}
+/* boutton personalisé */
+.dot{
+    position: relative;
+    display: inline-block;
+    top: -10px;
+    width: 20px;
+    height: 20px;
+    margin-left: 30px;
+    border: 4px solid rgb(180, 178, 178);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.808);
+    transition: all 0.35s ease-in-out;
+    box-shadow: 4px 4px 4px 0px black;
+}   
+/*on associe radio boutton aux images. lorsque le boutton (ex: boutton 2) est appuyé, alors la photo que l'on associe (photo 2) passe "devant" les autre images */
+#i1:checked ~ #one,
+#i2:checked ~ #two,
+#i3:checked ~ #three{
+    z-index: 1;  
+}
+/*augmente taille des boutons de couleurs. Â cause de animation transition les bouton blancs aparaisent plus grand */
+#i1:checked ~ .insidePhoto #dot1, #i2:checked ~ .insidePhoto #dot2, #i3:checked ~ .insidePhoto #dot3{
+    width: 23px;                      
+    height: 23px;  
+    
+}
+/* bouton appuyés */
+#i1:checked ~ .insidePhoto #dot1{
+    background-color: #cda673b9;
+    border: 4px solid #7a603e;
+}
+
+#i2:checked ~ .insidePhoto #dot2{
+    background:#c6c2c998;
+    border: 4px solid #534f56;
+}
+
+#i3:checked ~ .insidePhoto #dot3{
+    background-color: #17f3e425;
+    border:4px solid #097770;
+}
+
+/* fin des éléments à l'intérieux du diaporama */
+/* pour naviguer en cliquant sur les côtés du diaporama grâce aux labels */
+
+.pre, .nxt{
+	position: absolute;
+    width: 45%;
+	height: 100%;
+	background: rgba(0,0,0,.0); 
+
+}
+
+.pre{
+    left: 0px;
+}
+
+.nxt{
+    right: 0px;
+}
+
+/*fin naviguer en cliquant sur les côtés du diaporama */
+/* fin de la page 1 */
+/* Début de la page 2 */
+
+.principale{
+    margin: 10px;
+    
+}
+
+ /* pencarte bienvenue */
+#bienvenue{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 230px;
+    height: 60px;
+    background: #ecc899;
+    /* que pour chrome et safari */
+    background: linear-gradient(to right, #eba640 0%, #f80000 100%);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font: italic normal bold 2rem 'Satisfy';
+    margin: 15px auto;
+    border: 5px solid #684033;
+    letter-spacing: 2px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 10px 0px ;
+    animation: border-change-color 6s alternate infinite;
+}
+
+/* animation des bords pencarte */
+@keyframes border-change-color{
+    0%{border: 5px solid #097770;box-shadow: 10px 10px 10px 0px #093805f5;}
+    5%{border: 5px solid #097770;box-shadow: 10px 10px 10px 0px #093805f5;}
+    25%{border: 5px solid #2078dd;box-shadow: 10px 10px 10px 0px #062f5f;}
+    35%{border: 5px solid #2078dd;box-shadow: 10px 10px 10px 0px #062f5f;}
+    65%{border: 5px solid #dd1066;box-shadow: 10px 10px 10px 0px #6e0d36;}   
+    75%{border: 5px solid #dd1066;box-shadow: 10px 10px 10px 0px #6e0d36;}   
+    95%{border: 5px solid #684033;box-shadow: 10px 10px 10px 0px #381407;}
+    100%{border: 5px solid #684033;box-shadow: 10px 10px 10px 0px #381407;}
+}
+
+#bienvenue, h3{
+    letter-spacing: 2px;
+}
+
+h3{
+    text-align: center;
+    text-decoration: 5px underline #097770;
+    text-underline-offset: 4px;
+    margin: 60px 0px;
+    font-size: 1.5rem;
+}
+
+.principale article{
+  position: relative;
+}
+
+h3 ~ p{
+  text-indent: 35px;
+  line-height: 31px;
+}
+
+h3 ~ p::first-letter{
+  font-size: 1.6rem;
+  color: #dd1066;
+}
+
+p strong{
+  color: #dd1066;
+  font-size: 1.2rem;
+}
+
+/* bulle information sur abbr afpa */
+
+/* on crée le span bubble pour bien positionner before */
+#bubble{
+  position: relative;
+  cursor: help;
+}
+
+/* pour montrer que l'on peut se renseigner sur sigle afpa */
+p [title]::after{
+    content: "?";
+    display: inline-block;
+    position: absolute;
+    bottom: 30%;
+    left: 80%;
+    text-indent: 0px;
+    font-size: .9rem;
+    font-weight: bolder;
+    color: #097770;
+    transition: all .4s ease-in-out;
+
+}
+
+/* bulle information qui apparait lors d'un hover */
+p [title]::before{
+  position: absolute;
+  display: flex;
+  content: "Agence nationale pour la Formation Professionnelle des Adultes";
+  bottom: 110%;
+  right: -100%;
+  width: 180px;
+  height: 55px;
+  padding: 5px;
+  text-align: center;
+  font-size: .75rem;
+  line-height: 15px;
+  text-indent: 0;
+  background-color: #0977709c;
+  color: #FFFFFF;
+  border-radius: 10px;
+  opacity: 0;
+  transition: all .4s ease-in-out;
+}
+
+p [title]:hover::before{
+  opacity: 1;
+  transition: all .4s ease-in-out;
+}
+
+p [title]:hover:after{
+  opacity: 0;
+  transition: all .4s ease-in-out;
+}
+
+.fork{
+    float: left; 
+    padding-top: 7px;
+    margin-right: 10px;
+    margin-bottom: -4px;
+    width: 35px;
+}
+
+.friseImages{
+    display: flex;
+    margin: 20px 0px ;
+     /*Pour remplir les marges des images */
+    background-color: #684033;
+    border-bottom: 5px solid #684033;
+    border: 5px solid #684033;
+    border-radius: 12px;
+    overflow-y: scroll; 
+    /*faire scroll aimanté des images */
+    min-height: 13vh;
+    scroll-snap-type: x mandatory;
+}
+
+.friseImages img{
+    width: clamp(100px,43vw,240px);
+    /* aimanté aux milieu des images */
+    scroll-snap-align: center;
+}
+
+.para3{
+    margin: 15px 0px;
+}
+
+/* photo__omelette est le conteneur de legende et photo) */
+#photo__omelette{
+    float: right;
+    display: grid;   /* pour mettre legende sur le coté gauche de l'image */
+    grid-template-columns: 33px 1fr;
+    grid-row: 1fr;
+    border-radius: 14px;
+    border: 5px solid #097770;
+    background-color: #097770;
+    /* background vert= plat vege, rouge=viande, bleu=poisson */
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+figcaption{
+    writing-mode: vertical-lr; 
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Satisfy';
+    color: #fff;
+    background-color: #534f56c7;
+    padding-right: 5px;
+    /* legende en px reste tout le temps même taille que la photo */
+    font-size: 31px;
+    /* pour que les bords intérieux legende soit aussi arrondi */
+    border-radius: 10px 0px 0px 10px ;
+}
+
+.omelette{
+    width: 135px;
+    /* pour que les bords intérieux photo soit aussi arrondi */
+    border-radius: 0px 10px 10px 0px ;
+}
+
+/* button lien */
+.CTA{
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
+  text-align: center;
+  font-weight: bold;
+  text-indent: 0;
+  width: 100%;
+}
+
+.CTA a{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: .5em auto;
+  height: 50px;
+  width: 150px;
+  color: #0e0d0d;
+  font-weight: normal;
+  border: 4px solid #097770a4;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px 0px ;
+  /* pour arrondir rectangle a interieux du bouton */
+  overflow: hidden;
+  transition: all .2s linear;
+
+}
+
+.CTA a::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  clip-path: circle(40% at 100% 50%);
+  z-index: -1;
+  transition: all .3s linear;
+}
+
+.CTA a:hover:before{
+  clip-path: circle(130% at 90% 50%);
+  transition: all .3s linear;
+}
+
+.buttomEquipe a::before{
+  background: #534F56;
+}
+
+.buttomEquipe a:hover{
+  color: #cda673;
+  transition: all .2s linear;
+  box-shadow: 0px 0px 0px 0px black;
+  transform: scale(.95);
+}
+
+.buttomCommand a::before , .buttomMenu a::before{
+  background-color: #dd1066;
+}
+
+.buttomCommand a:hover , .buttomMenu a:hover{
+  color: #f8f8f8;
+  transition: all .2s linear;
+  box-shadow: 0px 0px 0px 0px black;
+  transform: scale(.95);
+
+}
+
+/* on cree la galerie image en grid */
+.gallerieImage{
+  box-sizing: border-box;
+  display: grid;
+  height: 210vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+  grid-template-areas:
+  "gallery4"
+  "gallery1"
+  "gallery3"
+  "gallery6"  
+  "gallery5"
+  "gallery2"
+  "gallery7";  
+  grid-gap: 12px;
+  overflow: hidden;
+}
+
+.grid{
+  border-radius: 10px;
+  padding-top: 5px;
+  background-size: cover;
+  background-position: center;
+}
+
+
+.gallery1{
+  grid-area: gallery1;
+  background-image: url(/images/festive.jpg);
+  
+}
+
+.gallery2{
+  grid-area: gallery2;
+  background-image: url(/images/coffee-shop.jpeg);
+  
+}
+
+.gallery3{
+  grid-area: gallery3;
+  background-image: url(/images/clickCollect/Carpaccio.jpg);
+}
+
+.gallery4{
+  grid-area: gallery4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: -60px;
+  
+}
+
+.gallery5{
+  grid-area: gallery5;
+  background-image: url(/images//pizza.jpg);
+  background-position: right;
+  
+}
+
+.gallery6{
+  grid-area: gallery6;
+  background-image: url(/images/burgers.jpg);
+  
+}
+.gallery7{
+  grid-area: gallery7;
+  background-image: url(/images/cuisine.jpg);
+}
+
+
+#video{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vh;
+  order: 10;
+
+}
+
+/* fin de la page 2 */
+/* menu tapbar */   
+
+#menu{
+  position: sticky;
+  margin-top: 10%;
+  bottom: 0%;
+  width: 90vw;
+  left: 5vw;
+  z-index: 10;
+}
+
+.tapbar{
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  height: 50px;
+    background-color: #EAD8C0;
+    border-radius: 15px;
+  }
+  
+  .tapbar li a img{
+    width: 40px;
+  }
+  
+  /* fin menu tapbar */
+  /* début menu burger */
+
+.hamburger{
+    position: relative;
+    width: 45px;
+    height: 45px;
+    padding-top: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: #534F56;
+}
+
+.bar{
+    display: block;
+    position: absolute;
+    background-color: #CDA673;
+    width: 30px;
+    height: 3px;
+    margin-top: -22px;
+    margin-left: 7px;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+}
+
+/* les barres en dessus et en dessous 'after', 'before' de la barre du milieux  */
+
+.bar::before, .bar::after{
+    content: "";
+    display: block;
+    position: absolute;
+    background: #CDA673;
+    width: 30px;
+    height: 3px;
+    border-radius: 5px;
+    transition: all .5s ease-in-out;
+}
+
+.bar::before{
+    transform: translateY(-12px);
+}
+
+.bar::after{
+    transform: translateY(12px);
+}
+
+/* liens à l'intérieux du menu déroulant */
+.navbar__links{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0vh;
+    width:100vw;
+    height: 0vh;
+    background-color: #000000bb;
+    backdrop-filter: blur(4px);
+    transition: all .8s ease-in-out;
+    overflow: hidden;
+    z-index: 9;
+}
+
+.navbar__links{
+    display: flex;
+    align-items: center;
+}
+
+.navbar__link:first-child{
+    margin-top: 8vh;
+}
+
+.navbar__link a{
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 15px;
+    color: #CDA673;
+    font-size: 1.3rem;
+    transition: all .4s ease-in-out ;
+}
+
+/* ajout de classe .open-nav grâce au Javascript Hamburger.js*/
+/* pour faire animation X sur menu burger */
+.open-nav .bar{
+    width: 0px;
+}
+
+.open-nav .bar::before{
+    transform: rotate(45deg);
+}
+
+.open-nav .bar::after{
+    transform: rotate(-45deg);
+}
+/* pour faire apparaitre le menu déroulant grâce au bouton .Hamburger */
+.open-nav .navbar__links{
+    height: 100%;
+}
+
+/* fin menu burger */
+/* footer mobile */
+
+footer{
+    background-color: #534F56;
+
+}
+
+.nousSuivre{
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    color: #F8F8F8;
+}
+
+.reseauxSociaux{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.icone{
+    padding: 12px;
+}
+
+.icone img{
+    width: 25px;
+}
+
+.copyright{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+    color: #F8F8F8;
+    font-size: 0.8rem;
+    background-color: #534F56;
+}
+
+
+
+
+/* media queries pour tout au dessus du portable */
+
+@media screen and (min-width:766px){
+
+    /* font family roboto pour le titre grande page accueil  */
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap");
+
+    /* unset pour faire reapparaître les éléments */
+
+    #pageDesktop {
+      all: unset;
+    }
+    body{
+      overflow-x: hidden;
+    }
+
+    /* personnalise bar de défilement page et rend futurproof*/
+    body::-webkit-scrollbar{
+      all: unset;
+      width: 17px;
+    }
+
+    /* Works on Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #cda673 #bdb1ac80;
+    }
+
+    /* Works on Chrome, Edge, and Safari */
+
+
+    *::-webkit-scrollbar-track {
+      background-color: #097770;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: #edca82;
+      border-radius: 20px;
+      border: 4px solid #a9c0a6;
+    }
+
+    /* debut page1 grande image accueil */
+    .heroBanner {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      /* petit effet parallax titre dans l'image */
+      -webkit-perspective: 1px;
+              perspective: 1px;
+      -webkit-transform-style: preserve-3d;
+              transform-style: preserve-3d;
+    /* pour enlever les barres defilement à l'interieux image */
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+    /* les 3 div bigImage qui contiennent chacune 1 image en background */
+    .bigImage {
+      position: absolute;
+      height: 150vh;
+      width: 100vw;
+      -webkit-transform-style: inherit;
+              transform-style: inherit;
+      background-size: cover;
+      background-position: center;
+      /* donne effet parallax */
+      -webkit-transform: translateZ(-1px) scale(2);
+              transform: translateZ(-1px) scale(2);
+    /* passe les image en arriere plan */
+      z-index: -1;
+    }
+
+    /* filtre opacité */
+    .bigImage::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    /* images de fond qui vont se succéder  */
+    #un {
+      background-image: url(../images/burgers.jpg);
+      -webkit-animation: thirdappear 3s 7s;
+              animation: thirdappear 3s 7s;
+    }
+
+    #deux {
+      background-image: url(../images/pizza.jpg);
+      -webkit-animation: Secondappear 3s 4s;
+              animation: Secondappear 3s 4s;
+    }
+
+    #trois {
+      background-image: url(../images/festive.jpg);
+      -webkit-animation: firstappear 4s;
+              animation: firstappear 4s;
+    }
+
+    /* conteneur des textes dans image */
+    .insideBigImage {
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      height: 100vh;
+      width: 100vw;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+    }
+    /* texte dans la grande image */
+
+    .insideBigImage h1 {
+      margin-bottom: 40vh;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 800;
+      font-size: 8rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      /* contour couleur titre */
+      -webkit-text-stroke: 4px #cda673;
+      -webkit-animation: showup 3s;
+              animation: showup 3s;
+    }
+
+    .insideBigImage p {
+      font-size: 1.5rem;
+      margin: 0 30%;
+      /* contour lettre en couleur */
+      text-shadow: 1.5px 0 0 #534F56, 1.5px 1.5px 0 #534F56, 0 1.5px 0 #534F56, -1.5px 1.5px 0 #534F56, -1.5px 0 0 #534F56, -1.5px -1.5px 0 #534F56, 0 -1.5px 0 #534F56, 1.5px -1.5px 0 #534F56;
+    }
+
+    /* debut du menu fixe en haut */
+    .headerDesktop {
+      position: fixed;
+      top: 0;
+      height: 37px;
+      width: 100%;
+      color: #f8f8f8;
+      text-transform: lowercase;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2;
+    }
+
+    .menuDesktop {
+      position: absolute;
+      top: 10%;
+      right: 2%;
+    }
+
+    .menuLien {
+      display: inline-block;
+      width: 10vw;
+    }
+
+    .menuLien a {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -ms-flex-line-pack: center;
+      align-content: center;
+      font-size: .8rem;
+    }
+
+    .menuLien a:hover {
+      color: #cda673;
+      -webkit-transition: all .5s ease-in-out;
+      transition: all .3s ease-in-out;
+      -webkit-transform: scale(1.3);
+              transform: scale(1.3);
+    }
+
+    .menuLien:not(:last-child) {
+      border-right: 2px solid #cda673;
+    }
+
+    .menuLien::after {
+      content: "";
+      display: block;
+      margin: auto;
+      height: 4px;
+      margin-top: 5px;
+      background-color: #cda673;
+      -webkit-transition: all .3s ease-in-out;
+      transition: all .3s ease-in-out;
+      -webkit-transform: scale(0);
+              transform: scale(0);
+    }
+    /* barre qui apparait sous menu lors d'un hover */
+
+    .menuLien:hover::after {
+      -webkit-transform: scale(0.8);
+              transform: scale(0.8);
+      -webkit-transition: all .3s ease-in-out;
+      transition: all .3s ease-in-out;
+    }
+
+    /* animation titre qui se rempli */
+    @-webkit-keyframes showup {
+      0% {
+        color: transparent;
+      }
+      40% {
+        color: transparent;
+      }
+      100% {
+        color: #f8f8f8;
+      }
+    }
+
+    @keyframes showup {
+      0% {
+        color: transparent;
+      }
+      40% {
+        color: transparent;
+      }
+      100% {
+        color: #f8f8f8;
+      }
+    }
+
+      /* animation image accueil qui se succede */
+    @-webkit-keyframes firstappear {
+      0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      20% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      100% {
+        -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+        z-index: 0;
+      }
+    }
+
+    @keyframes firstappear {
+      0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      20% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      100% {
+        -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+        z-index: 0;
+      }
+    }
+
+    @-webkit-keyframes Secondappear {
+      0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      20% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      100% {
+        -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+        z-index: 0;
+      }
+    }
+
+    @keyframes Secondappear {
+      0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      20% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      100% {
+        -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+        z-index: 0;
+      }
+    }
+
+    @-webkit-keyframes thirdappear {
+      0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      20% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      100% {
+        -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+        z-index: 0;
+      }
+    }
+
+    @keyframes thirdappear {
+      0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      20% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+        z-index: 0;
+      }
+      100% {
+        -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+        z-index: 0;
+      }
+    }
+
+    /* pour bien se concentrer sur le paragraphe, on crée un cadre quad souris passe dessus */
+    .principale article::before{
+      content: "";
+      position: absolute;
+      top: 2%;
+      right: -3%;
+      bottom: 0%;
+      left: -3%;
+      height: 850px;
+      z-index: -3;
+      border-radius: 15px;
+      background-color:rgba(255, 255, 255, 0.4);
+      border: 4px solid #097770;
+      opacity: 0;
+    }
+
+/* on cree une grille en 6x6 case egale */
+    .gallerieImage{
+      all: unset;
+      display: grid;
+      height: 90vh;
+      width: 90vw;
+      padding: 5%;
+      margin-top: 15vh;
+      grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr, 1fr;
+      grid-template-rows: 1fr, 1fr, 1fr, 1fr, 1fr, 1fr;
+      grid-template-areas: 
+          "gallery1 gallery1 gallery4 gallery4 gallery5 gallery5"
+          "gallery1 gallery1 gallery3 gallery3 gallery5 gallery5"
+          "gallery1 gallery1 gallery3 gallery3 gallery6 gallery6"
+          "gallery2 gallery2 gallery3 gallery3 gallery6 gallery6"
+          "gallery2 gallery2 gallery3 gallery3 gallery7 gallery7"
+          "gallery2 gallery2 gallery3 gallery3 gallery7 gallery7";
+      grid-gap: 3px;
+  /* on place a la fin */
+      order: 3;
+
+    }
+
+    /* on aere la grille et on change les images*/
+    .gallery1{
+      margin: 1% 12%;
+      background-image: url(/images/accueil1.jpg);
+    }
+
+    .gallery2{
+      margin: 2% 3% 3% 3%;
+    }
+
+    .gallery3{
+      margin: 5%;
+      background-image: url(/images/accueil3.jpg);
+      background-position: right;
+    }
+    
+    .gallery5{
+      margin-left: 4%;
+      background-image: url(/images/accueil2.jpg);
+      
+    }
+    
+    .gallery6{
+      background-image: url(/images/clickCollect/Carpaccio.jpg);
+      margin: 15%;
+    }
+
+/* on enleve tapbar le diaporama mobile et le header mobile */
+    .headerMobile{
+      display: none;
+    }
+
+    .container{
+        display: none;
+    }
+    
+    .tapbar{
+        display: none;
+    }
+
+
+    .principale{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: baseline;
+    }
+/* on reduit cadre de la pencarte bienvenue */
+    #bienvenue{
+        width: 100%;
+        margin: 5% 35% -10% 35%;
+    }
+
+}
+
+/* pour tablette */
+@media screen and (min-width:766px) and (max-width:1024px) and (orientation:landscape) {
+
+    article{
+        width: 45%;
+        margin-bottom: 25vh;
+        padding:0 10px;
+
+    }
+    /* on selectionne le paragraphe du 1er article */
+/* pour aligne les paragraphe */
+    .paraOne{
+      display: block;
+      margin-top: 93px;
+      width: 75%;
+      padding-left: 45px;
+    }
+    
+    .para3{
+      margin-left: 15px;
+    }
+
+    .try{
+        width: 100%;
+        order: 3;
+    }
+
+/* on change les tailles des case du menu */
+/* petites case pour accueil/cafe/equipe/contact */
+    .menuLien:nth-child(odd){
+        width: 10vw;
+    }
+/* grande cases pour les autres */
+    .menuLien:nth-child(even){
+        width: 15vw;
+    }
+/* on aere la page */
+    .principale article{
+      margin-top: 10vh;
+      max-height: 500px;
+    }
+    /* pour que le cadre ne rentre pas sur le 3eme paragraphe */
+    .principale article::before{
+      height: 700px;
+    }
+
+    .principale h2+article::before{
+    top: 5%;
+    right: 0;
+    opacity: 1;
+    }
+}
+
+@media screen and (min-width:1025px) and (max-width:1056px) {
+/* pour aligner les paragraphes */
+      .paraOne{
+        padding-top: 33px;
+      }
+      .try h3{
+        margin-bottom: 91px;
+      }
+}
+
+/* pour desktop */
+@media screen and (min-width:1025px) {
+
+    article{
+      margin-top: 10vh;
+        width: 31%;
+        height: 750px;
+    }
+
+    .try{
+        margin: 2%;
+
+    }
+
+    /* aligner les paragraphes */
+
+    .paraOne{
+      margin-top: 88px;
+    }
+
+    .para3{
+      margin-top: -6px;
+    }
+    /* cadre qui apparait sur paragraphe */
+    .principale article:hover:before, .principale article:hover:after{
+      opacity: 1;
+      transition: all .4s ease-in-out;
+    }
+}
