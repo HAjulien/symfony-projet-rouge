@@ -18,7 +18,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private $pseudo;
+    private $email;
 
     #[ORM\Column(type: 'json')]
     private $roles = [];
@@ -26,16 +26,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Plats::class, orphanRemoval: true)]
-    private $plats;
+    #[ORM\Column(type: 'string', length: 70)]
+    private $pseudo;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PlatSelectionSemaine::class, orphanRemoval: true)]
-    private $platSelectionSemaines;
+    #[ORM\Column(type: 'integer')]
+    private $idAFPA;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $phone;
+
+    #[ORM\Column(type: 'integer')]
+    private $pointFidelite;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commentaire::class)]
+    private $commentaires;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Selectionne::class)]
+    private $selectionnes;
 
     public function __construct()
     {
-        $this->plats = new ArrayCollection();
-        $this->platSelectionSemaines = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
+        $this->selectionnes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,14 +55,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getPseudo(): ?string
+    public function getEmail(): ?string
     {
-        return $this->pseudo;
+        return $this->email;
     }
 
-    public function setPseudo(string $pseudo): self
+    public function setEmail(string $email): self
     {
-        $this->pseudo = $pseudo;
+        $this->email = $email;
 
         return $this;
     }
@@ -62,7 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->pseudo;
+        return (string) $this->email;
     }
 
     /**
@@ -70,7 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->pseudo;
+        return (string) $this->email;
     }
 
     /**
@@ -127,30 +139,78 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, Plats>
-     */
-    public function getPlats(): Collection
+    public function getPseudo(): ?string
     {
-        return $this->plats;
+        return $this->pseudo;
     }
 
-    public function addPlat(Plats $plat): self
+    public function setPseudo(string $pseudo): self
     {
-        if (!$this->plats->contains($plat)) {
-            $this->plats[] = $plat;
-            $plat->setUser($this);
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    public function getIdAFPA(): ?int
+    {
+        return $this->idAFPA;
+    }
+
+    public function setIdAFPA(int $idAFPA): self
+    {
+        $this->idAFPA = $idAFPA;
+
+        return $this;
+    }
+
+    public function getPhone(): ?int
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?int $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getPointFidelite(): ?int
+    {
+        return $this->pointFidelite;
+    }
+
+    public function setPointFidelite(int $pointFidelite): self
+    {
+        $this->pointFidelite = $pointFidelite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setUser($this);
         }
 
         return $this;
     }
 
-    public function removePlat(Plats $plat): self
+    public function removeCommentaire(Commentaire $commentaire): self
     {
-        if ($this->plats->removeElement($plat)) {
+        if ($this->commentaires->removeElement($commentaire)) {
             // set the owning side to null (unless already changed)
-            if ($plat->getUser() === $this) {
-                $plat->setUser(null);
+            if ($commentaire->getUser() === $this) {
+                $commentaire->setUser(null);
             }
         }
 
@@ -158,29 +218,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, PlatSelectionSemaine>
+     * @return Collection<int, Selectionne>
      */
-    public function getPlatSelectionSemaines(): Collection
+    public function getSelectionnes(): Collection
     {
-        return $this->platSelectionSemaines;
+        return $this->selectionnes;
     }
 
-    public function addPlatSelectionSemaine(PlatSelectionSemaine $platSelectionSemaine): self
+    public function addSelectionne(Selectionne $selectionne): self
     {
-        if (!$this->platSelectionSemaines->contains($platSelectionSemaine)) {
-            $this->platSelectionSemaines[] = $platSelectionSemaine;
-            $platSelectionSemaine->setUser($this);
+        if (!$this->selectionnes->contains($selectionne)) {
+            $this->selectionnes[] = $selectionne;
+            $selectionne->setUser($this);
         }
 
         return $this;
     }
 
-    public function removePlatSelectionSemaine(PlatSelectionSemaine $platSelectionSemaine): self
+    public function removeSelectionne(Selectionne $selectionne): self
     {
-        if ($this->platSelectionSemaines->removeElement($platSelectionSemaine)) {
+        if ($this->selectionnes->removeElement($selectionne)) {
             // set the owning side to null (unless already changed)
-            if ($platSelectionSemaine->getUser() === $this) {
-                $platSelectionSemaine->setUser(null);
+            if ($selectionne->getUser() === $this) {
+                $selectionne->setUser(null);
             }
         }
 

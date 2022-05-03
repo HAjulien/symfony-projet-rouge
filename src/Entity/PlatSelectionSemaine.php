@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\PlatSelectionSemaineRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlatSelectionSemaineRepository::class)]
@@ -15,23 +13,19 @@ class PlatSelectionSemaine
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 70)]
+    #[ORM\Column(type: 'string', length: 30)]
     private $jour;
 
     #[ORM\Column(type: 'integer')]
-    private $quantite;
+    private $quantiteJour;
 
-    #[ORM\OneToMany(mappedBy: 'platSelectionSemaine', targetEntity: Plats::class, orphanRemoval: true)]
-    private $plats;
-
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'platSelectionSemaines')]
+    #[ORM\ManyToOne(targetEntity: Contient::class, inversedBy: 'platSelectionSemaines')]
     #[ORM\JoinColumn(nullable: false)]
-    private $user;
+    private $contient;
 
-    public function __construct()
-    {
-        $this->plats = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(targetEntity: Selectionne::class, inversedBy: 'platSelectionSemaine')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $selectionne;
 
     public function getId(): ?int
     {
@@ -50,56 +44,38 @@ class PlatSelectionSemaine
         return $this;
     }
 
-    public function getQuantite(): ?int
+    public function getQuantiteJour(): ?int
     {
-        return $this->quantite;
+        return $this->quantiteJour;
     }
 
-    public function setQuantite(int $quantite): self
+    public function setQuantiteJour(int $quantiteJour): self
     {
-        $this->quantite = $quantite;
+        $this->quantiteJour = $quantiteJour;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Plats>
-     */
-    public function getPlats(): Collection
+    public function getContient(): ?Contient
     {
-        return $this->plats;
+        return $this->contient;
     }
 
-    public function addPlat(Plats $plat): self
+    public function setContient(?Contient $contient): self
     {
-        if (!$this->plats->contains($plat)) {
-            $this->plats[] = $plat;
-            $plat->setPlatSelectionSemaine($this);
-        }
+        $this->contient = $contient;
 
         return $this;
     }
 
-    public function removePlat(Plats $plat): self
+    public function getSelectionne(): ?Selectionne
     {
-        if ($this->plats->removeElement($plat)) {
-            // set the owning side to null (unless already changed)
-            if ($plat->getPlatSelectionSemaine() === $this) {
-                $plat->setPlatSelectionSemaine(null);
-            }
-        }
-
-        return $this;
+        return $this->selectionne;
     }
 
-    public function getUser(): ?User
+    public function setSelectionne(?Selectionne $selectionne): self
     {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
+        $this->selectionne = $selectionne;
 
         return $this;
     }

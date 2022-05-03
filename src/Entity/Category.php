@@ -21,7 +21,7 @@ class Category
     #[ORM\Column(type: 'string', length: 120)]
     private $slug;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Plats::class)]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Plat::class)]
     private $plats;
 
     public function __construct()
@@ -59,14 +59,14 @@ class Category
     }
 
     /**
-     * @return Collection<int, Plats>
+     * @return Collection<int, Plat>
      */
     public function getPlats(): Collection
     {
         return $this->plats;
     }
 
-    public function addPlat(Plats $plat): self
+    public function addPlat(Plat $plat): self
     {
         if (!$this->plats->contains($plat)) {
             $this->plats[] = $plat;
@@ -76,7 +76,7 @@ class Category
         return $this;
     }
 
-    public function removePlat(Plats $plat): self
+    public function removePlat(Plat $plat): self
     {
         if ($this->plats->removeElement($plat)) {
             // set the owning side to null (unless already changed)

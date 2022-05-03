@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Plats;
+use App\Entity\Commentaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Plats>
+ * @extends ServiceEntityRepository<Commentaire>
  *
- * @method Plats|null find($id, $lockMode = null, $lockVersion = null)
- * @method Plats|null findOneBy(array $criteria, array $orderBy = null)
- * @method Plats[]    findAll()
- * @method Plats[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Commentaire|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Commentaire|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Commentaire[]    findAll()
+ * @method Commentaire[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlatsRepository extends ServiceEntityRepository
+class CommentaireRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Plats::class);
+        parent::__construct($registry, Commentaire::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Plats $entity, bool $flush = true): void
+    public function add(Commentaire $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class PlatsRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Plats $entity, bool $flush = true): void
+    public function remove(Commentaire $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,15 +48,15 @@ class PlatsRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Plats[] Returns an array of Plats objects
+    //  * @return Commentaire[] Returns an array of Commentaire objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('c.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -65,10 +65,10 @@ class PlatsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Plats
+    public function findOneBySomeField($value): ?Commentaire
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
